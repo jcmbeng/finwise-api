@@ -10,3 +10,5 @@ services:
       POSTGRES_DB: customer_db
     volumes:
       - /var/lib/postgresql/data
+
+

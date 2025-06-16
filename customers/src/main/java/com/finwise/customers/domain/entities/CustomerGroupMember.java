@@ -9,6 +9,8 @@ import java.util.UUID;
 
 /**
  * Represents a member of a group customer.
+ *
+ * @author Jean-Claude MBENG
  */
 @Entity
 @Table(name = "customer_group_members")
@@ -22,19 +24,20 @@ public class CustomerGroupMember {
     @Id
     @GeneratedValue
     @UuidGenerator
+    @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id", nullable = false)
     private Customer group;
 
-    @Column(name = "member_name", nullable = false)
+    @Column(name = "member_name", nullable = false, length = 100)
     private String memberName;
 
-    @Column(name = "member_id_number")
-    private String identificationNumber;
+    @Column(name = "member_id_number", length = 100)
+    private String memberIdNumber;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "identification_type")
+    @Column(name = "identification_type", length = 30)
     private IdentificationType identificationType;
 }

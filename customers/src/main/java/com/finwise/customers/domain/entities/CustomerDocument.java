@@ -9,9 +9,11 @@ import java.util.UUID;
 
 /**
  * Represents a member of a group customer.
+ *
+ * @author Jean-Claude MBENG
  */
 @Entity
-@Table(name = "customer_group_members")
+@Table(name = "customer_documents")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,6 +27,7 @@ public class CustomerDocument {
     @Id
     @GeneratedValue
     @UuidGenerator
+    @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
     /**
@@ -36,10 +39,16 @@ public class CustomerDocument {
     private Customer customer;
 
     /**
+     * Eg. Passeport number
+     */
+    @Column(name = "document_number", nullable = false, length = 50)
+    private String documentNumber;
+
+    /**
      * Type of identification represented by the document.
      */
     @Enumerated(EnumType.STRING)
-    @Column(name = "document_type", nullable = false)
+    @Column(name = "document_type", nullable = false, length = 50)
     private IdentificationType documentType;
 
     /**
@@ -47,5 +56,6 @@ public class CustomerDocument {
      */
     @Column(name = "document_id", nullable = false)
     private UUID documentId;
+
 
 }

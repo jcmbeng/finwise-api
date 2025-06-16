@@ -10,13 +10,14 @@ import org.hibernate.annotations.UuidGenerator;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Represents a customer in the FinWise Core Banking System.
  * <p>
  * Each customer can hold one or more accounts and is identified uniquely using a UUID.
  *
- * @author
+ * @author Jean-Claude MBENG
  */
 @Entity
 @Table(name = "customers")
@@ -35,18 +36,18 @@ public class Customer {
     @GeneratedValue
     @UuidGenerator
     @Column(name = "id", updatable = false, nullable = false)
-    private String id;
+    private UUID id;
 
     /**
      * Customer's first name.
      */
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name", nullable = false, length = 100)
     private String firstName;
 
     /**
      * Customer's last name.
      */
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name", nullable = false, length = 100)
     private String lastName;
 
     /**
@@ -59,26 +60,26 @@ public class Customer {
     /**
      * Customer's date of birth, can be used for creation the date of the group (association, NGO, company...).
      */
-    @Column(name = "birth_date")
+    @Column(name = "birth_date", length = 4)
     private LocalDate birthDate;
 
     /**
      * Customer's gender.
      */
     @Enumerated(EnumType.STRING)
-    @Column(name = "gender")
+    @Column(name = "gender", length = 20)
     private Gender gender;
 
     /**
      * Mobile phone number used for contact and mobile money.
      */
-    @Column(name = "phone_number", nullable = false)
+    @Column(name = "phone_number", nullable = false, unique = true, length = 50)
     private String phoneNumber;
 
     /**
      * Customer's email address.
      */
-    @Column(name = "email")
+    @Column(name = "email", unique = true, length = 100)
     private String email;
 
     /**
@@ -91,15 +92,14 @@ public class Customer {
      * Status of the customer (ACTIVE, INACTIVE, BLOCKED).
      */
     @Enumerated(EnumType.STRING)
-    @Column(name = "status")
+    @Column(name = "status", length = 30)
     private CustomerStatus status;
-
 
     /**
      * Type of the customer: INDIVIDUAL or GROUP.
      */
     @Enumerated(EnumType.STRING)
-    @Column(name = "customer_type", nullable = false)
+    @Column(name = "customer_type", nullable = false , length = 30)
     private CustomerType customerType;
 
     /**

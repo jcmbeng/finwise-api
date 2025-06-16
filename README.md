@@ -3,7 +3,7 @@
 ![Java](https://img.shields.io/badge/Java-21-blue.svg)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-green.svg)
 ![Docker](https://img.shields.io/badge/Docker-enabled-blue)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15.x-blue.svg)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16.x-blue.svg)
 ![CI/CD](https://img.shields.io/badge/CI/CD-GitHub%20Actions%20%26%20Jenkins-green)
 
 > **FinWise** is a secure, modular, microservice-based core banking platform tailored for microfinance institutions.  

@@ -54,7 +54,7 @@
 ### Run Locally (Dev Mode)
 
 ```bash
-git clone https://github.com/your-org/finwise-api.git
+git clone [https://github.com/jcmbeng/finwise-api.git]
 cd finwise-api
 
 # Start all services using Docker

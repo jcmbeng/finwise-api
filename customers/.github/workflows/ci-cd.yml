@@ -1,0 +1,56 @@
+name: CI/CD Pipeline
+on:
+  push:
+    branches:
+      - features/customers-management
+#  pull_request:
+ #   branches:
+  #    - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      - name: Set up the JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'corretto'
+
+      - name: Cache maven
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml')}}
+          restore-key: ${{ runner.os }}-maven
+
+      - name: Build maven
+        run: mvn clean package -Dspring.profile=dev
+
+      - name: Copy files via SSH
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secret.VPS_IP }}
+          username: ${{ secret.VPS_IP }}
+          key: ${{ secret.VPS_SECRET }}
+          source: "target/*.jar"
+          target: /opt/finwise/finwise-customer.jar
+          strip_component: 0
+
+
+      - name: Deploy to VPS
+        uses: appleboy/scp-action@v1.2.0
+        with:
+          host: ${{ secret.VPS_IP }}
+          username: ${{ secret.VPS_IP }}
+          key: ${{ secret.VPS_SECRET }}
+        script: |
+          cd /opt/finwise
+          java -jar finwise-customer.jar
+
+
+

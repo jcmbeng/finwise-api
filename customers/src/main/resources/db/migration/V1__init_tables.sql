@@ -1,6 +1,6 @@
 CREATE TABLE customers
 (
-    id UUID NOT NULL,
+    id UUID NOT NULL DEFAULT gen_random_uuid(),
     first_name      VARCHAR(100)                NOT NULL,
     last_name       VARCHAR(100)                NOT NULL,
     birth_date      date,
@@ -26,7 +26,7 @@ ALTER TABLE customers
 
 CREATE TABLE customer_group_members
 (
-    id UUID NOT NULL,
+    id UUID NOT NULL DEFAULT gen_random_uuid(),
     group_id            UUID         NOT NULL,
     member_name         VARCHAR(100) NOT NULL,
     member_id_number    VARCHAR(100),
@@ -40,7 +40,7 @@ ALTER TABLE customer_group_members
 
 CREATE TABLE customer_documents
 (
-    id UUID NOT NULL,
+    id UUID NOT NULL DEFAULT gen_random_uuid(),
     customer_id     UUID        NOT NULL,
     document_number VARCHAR(50) NOT NULL,
     document_type   VARCHAR(50) NOT NULL,
